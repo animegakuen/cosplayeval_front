@@ -1,6 +1,13 @@
+<script setup>
+import { useCosplayerStore } from '../stores/cosplayer'
+
+const cosplayerStore = useCosplayerStore()
+cosplayerStore.setCosplayers()
+</script>
+
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>{{cosplayerStore.cosplayers}}</h1>
   </div>
 </template>
 
