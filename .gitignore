@@ -29,8 +29,7 @@ coverage
 
 # Ignore data used by back-end
 public/data/
-cosplayer_data
 
 # Ignore back-end binary and configuration
-cosplayer-data
+cosplayeval_back
 api.cfg

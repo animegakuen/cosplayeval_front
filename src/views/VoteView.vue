@@ -10,7 +10,7 @@ const onSubmit = () => {
   (document.getElementById('cosplayerNumber') as HTMLInputElement).value = '';
   (document.getElementById('cosplayerVote') as HTMLInputElement).value = '';
 
-  fetch('http://192.168.138.233:5000/votes', {
+  fetch('http://0.0.0.0:5000/votes', {
     body: JSON.stringify({ cosplayerId: number, score: vote, juryName: name }),
     headers: new Headers({ "Content-Type": "application/json" }),
     method: 'POST',
