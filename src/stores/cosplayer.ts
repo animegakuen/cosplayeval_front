@@ -7,7 +7,8 @@ export const useCosplayerStore = defineStore('cosplayers', () => {
   const cosplayers: Ref<Cosplayers> = ref(new Cosplayers())
 
   const setCosplayers = async (cosplayer?: CosplayerPayload): Promise<void> => {
-    await CosplayerAPI.send(cosplayer)
+    if (cosplayer)
+      await CosplayerAPI.send(cosplayer)
 
     cosplayers.value = await CosplayerAPI.fetch()
   }
