@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useCosplayerStore } from '@/stores/cosplayer';
 import { useVoteStore } from '@/stores/vote';
 
-const { setCosplayers } = useCosplayerStore()
 const { setVotes } = useVoteStore()
 
 const onSubmit = () => {
@@ -18,8 +16,6 @@ const onSubmit = () => {
 
   setVotes({ cosplayerId: number, score: vote, juryName: name! })
 }
-
-setCosplayers()
 </script>
 
 <template>

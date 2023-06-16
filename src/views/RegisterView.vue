@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { useCosplayerStore } from '@/stores/cosplayer';
-
-const store = useCosplayerStore()
+import { CosplayerAPI } from '@/structures/api';
 
 const characterName = ref('')
 const name = ref('')
@@ -11,15 +9,13 @@ const nickname = ref('')
 const phoneNumber = ref('')
 
 const onSubmit = () => {
-  store.setCosplayers({
+  CosplayerAPI.send({
     characterName: characterName.value,
     name: name.value,
     nickname: nickname.value,
     phoneNumber: phoneNumber.value,
-    images: ['']
+    images: []
   })
-
-  console.log(store.cosplayers[0])
 }
 </script>
 

@@ -23,6 +23,15 @@ export interface CosplayerData extends CosplayerPayload {
  */
 export class Cosplayers extends Array<CosplayerData> {
   /**
+   * Allow us to instance out the class with pre-defined cosplayers.
+   */
+  constructor(items?: CosplayerData[]) {
+    super()
+
+    items?.forEach(i => this.push(i))
+  }
+
+  /**
    * @param {number} id The ID of the cosplayer you want to find.
    * @returns The cosplayer's data if they exist.
    */

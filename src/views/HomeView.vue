@@ -22,7 +22,7 @@ const onSubmit = () => {
   </main>
 </template>
 
-<style>
+<style scoped>
 .login {
   display: flex;
   height: 100vh;

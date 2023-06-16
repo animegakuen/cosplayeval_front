@@ -1,3 +1,5 @@
+import { useCosplayerStore } from '@/stores/cosplayer'
+import { CosplayerAPI } from '@/structures/api'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -11,12 +13,35 @@ const router = createRouter({
     {
       path: '/vote',
       name: 'vote',
-      component: () => import('../views/VoteView.vue')
+      component: () => import('../views/VoteView.vue'),
+      beforeEnter: (_to, _from, next) => {
+        CosplayerAPI
+          .fetch()
+          .then(data => {
+            useCosplayerStore().hydrate(data)
+
+            next()
+          })
+      }
     },
     {
       path: '/register',
       name: 'register',
       component: () => import('../views/RegisterView.vue')
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: () => import('../views/ListView.vue'),
+      beforeEnter: (_to, _from, next) => {
+        CosplayerAPI
+          .fetch()
+          .then(data => {
+            useCosplayerStore().hydrate(data)
+
+            next()
+          })
+      }
     }
   ]
 })

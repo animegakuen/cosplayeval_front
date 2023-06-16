@@ -15,6 +15,15 @@ export interface Vote {
  */
 export class Votes extends Array<Vote> {
   /**
+   * Allow us to instance out the class with pre-defined votes.
+   */
+  constructor(items?: Vote[]) {
+    super()
+
+    items?.forEach(i => this.push(i))
+  }
+
+  /**
    * Returns the placements of the cosplayers competing.
    * @param {Cosplayers} cosplayers The cosplayers to get the placement of.
    */
