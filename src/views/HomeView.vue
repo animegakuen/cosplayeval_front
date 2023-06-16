@@ -2,7 +2,6 @@
 import { RouterLink } from 'vue-router'
 
 const onSubmit = () => {
-  console.log(document.getElementById('username'))
   document.cookie += `jury=${(document.getElementById('username') as HTMLInputElement).value}`
 }
 </script>
@@ -15,7 +14,7 @@ const onSubmit = () => {
       </h2>
       <input id="username" type="text" class="username" />
       <RouterLink to="/vote" class="submit">
-        <button type="submit" @click="onSubmit" >
+        <button type="submit" @click="onSubmit">
           Enviar
         </button>
       </RouterLink>

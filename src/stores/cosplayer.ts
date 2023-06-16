@@ -7,9 +7,11 @@ const endpoint = 'http://localhost:5000/cosplayers'
  * What we send to the API to register a cosplayer.
  */
 export interface CosplayerPayload {
+  characterName: string
   images: string[]
   name: string
-  stageName: string
+  nickname: string
+  phoneNumber: string
 }
 
 /**

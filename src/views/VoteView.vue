@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useCosplayerStore } from '@/stores/cosplayer';
+
+const store = useCosplayerStore()
+
 const onSubmit = () => {
   const number = Number.parseInt((document.getElementById('cosplayerNumber') as HTMLInputElement).value)
   const vote = Number.parseFloat((document.getElementById('cosplayerVote') as HTMLInputElement).value)
@@ -10,13 +14,15 @@ const onSubmit = () => {
   (document.getElementById('cosplayerNumber') as HTMLInputElement).value = '';
   (document.getElementById('cosplayerVote') as HTMLInputElement).value = '';
 
-  fetch('http://0.0.0.0:5000/votes', {
+  fetch('http://localhost:5000/votes', {
     body: JSON.stringify({ cosplayerId: number, score: vote, juryName: name }),
     headers: new Headers({ "Content-Type": "application/json" }),
     method: 'POST',
     mode: 'cors'
   })
 }
+
+store.setCosplayers()
 </script>
 
 <template>
@@ -35,7 +41,7 @@ const onSubmit = () => {
       </h4>
       <input id="cosplayerVote" type="number" min="1" max="100" class="cosplayerVote" />
 
-      <button type="submit" @click="onSubmit" class="submit" >
+      <button type="submit" @click="onSubmit" class="submit">
         Enviar
       </button>
     </div>
@@ -62,6 +68,7 @@ const onSubmit = () => {
   width: 20%;
   margin: 0 15px 0 15px;
 }
+
 .cosplayerVote {
   width: 20%;
   margin: 0 15px 0 15px;
