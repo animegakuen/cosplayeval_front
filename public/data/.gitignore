@@ -1,0 +1,5 @@
+# Ignore all data changes
+*
+
+# But not the gitignore of course.
+!.gitignore

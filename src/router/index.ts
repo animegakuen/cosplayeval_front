@@ -1,5 +1,6 @@
 import { useCosplayerStore } from '@/stores/cosplayer'
-import { CosplayerAPI } from '@/structures/api'
+import { useVoteStore } from '@/stores/vote'
+import { CosplayerAPI, VoteAPI } from '@/structures/api'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -33,14 +34,14 @@ const router = createRouter({
       path: '/list',
       name: 'list',
       component: () => import('../views/ListView.vue'),
-      beforeEnter: (_to, _from, next) => {
-        CosplayerAPI
-          .fetch()
-          .then(data => {
-            useCosplayerStore().hydrate(data)
+      beforeEnter: async (_to, _from, next) => {
+        const cosplayers = await CosplayerAPI.fetch()
+        useCosplayerStore().hydrate(cosplayers)
 
-            next()
-          })
+        const votes = await VoteAPI.fetch()
+        useVoteStore().hydrate(votes)
+
+        next()
       }
     }
   ]

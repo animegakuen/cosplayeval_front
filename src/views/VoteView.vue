@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { useVoteStore } from '@/stores/vote';
-
-const { setVotes } = useVoteStore()
+import { VoteAPI } from '@/structures/api';
 
 const onSubmit = () => {
   const number = Number.parseInt((document.getElementById('cosplayerNumber') as HTMLInputElement).value)
@@ -14,7 +12,7 @@ const onSubmit = () => {
   (document.getElementById('cosplayerNumber') as HTMLInputElement).value = '';
   (document.getElementById('cosplayerVote') as HTMLInputElement).value = '';
 
-  setVotes({ cosplayerId: number, score: vote, juryName: name! })
+  VoteAPI.send({ cosplayerId: number, score: vote, juryName: name! })
 }
 </script>
 
