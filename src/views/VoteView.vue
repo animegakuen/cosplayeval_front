@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useCosplayerStore } from '@/stores/cosplayer';
+import { useVoteStore } from '@/stores/vote';
 
-const store = useCosplayerStore()
+const { setCosplayers } = useCosplayerStore()
+const { setVotes } = useVoteStore()
 
 const onSubmit = () => {
   const number = Number.parseInt((document.getElementById('cosplayerNumber') as HTMLInputElement).value)
@@ -14,15 +16,10 @@ const onSubmit = () => {
   (document.getElementById('cosplayerNumber') as HTMLInputElement).value = '';
   (document.getElementById('cosplayerVote') as HTMLInputElement).value = '';
 
-  fetch('http://localhost:5000/votes', {
-    body: JSON.stringify({ cosplayerId: number, score: vote, juryName: name }),
-    headers: new Headers({ "Content-Type": "application/json" }),
-    method: 'POST',
-    mode: 'cors'
-  })
+  setVotes({ cosplayerId: number, score: vote, juryName: name! })
 }
 
-store.setCosplayers()
+setCosplayers()
 </script>
 
 <template>

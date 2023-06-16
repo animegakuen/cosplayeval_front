@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+
 import { useCosplayerStore } from '@/stores/cosplayer';
 
 const store = useCosplayerStore()
@@ -17,6 +18,8 @@ const onSubmit = () => {
     phoneNumber: phoneNumber.value,
     images: ['']
   })
+
+  console.log(store.cosplayers[0])
 }
 </script>
 

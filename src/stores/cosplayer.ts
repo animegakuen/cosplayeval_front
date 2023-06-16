@@ -1,41 +1,15 @@
 import { type Ref, ref } from 'vue'
 import { defineStore } from "pinia";
 
-const endpoint = 'http://localhost:5000/cosplayers'
-
-/**
- * What we send to the API to register a cosplayer.
- */
-export interface CosplayerPayload {
-  characterName: string
-  images: string[]
-  name: string
-  nickname: string
-  phoneNumber: string
-}
-
-/**
- * What we receive when searching the API for cosplayers.
- */
-export interface Cosplayer extends CosplayerPayload {
-  id: number
-}
+import { CosplayerAPI, Cosplayers, type CosplayerPayload } from '@/structures/api/Cosplayer';
 
 export const useCosplayerStore = defineStore('cosplayers', () => {
-  const cosplayers: Ref<Cosplayer[]> = ref([])
+  const cosplayers: Ref<Cosplayers> = ref(new Cosplayers())
 
   const setCosplayers = async (cosplayer?: CosplayerPayload): Promise<void> => {
-    if (cosplayer)
-      await fetch(endpoint, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cosplayer)
-      })
+    await CosplayerAPI.send(cosplayer)
 
-    cosplayers.value = await (await fetch(endpoint, { mode: 'cors' })).json()
+    cosplayers.value = await CosplayerAPI.fetch()
   }
 
   return { setCosplayers, cosplayers }
