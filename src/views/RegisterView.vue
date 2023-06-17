@@ -20,10 +20,10 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <main  class="register">
+  <main class="register">
     <div class="form">
       <label>
-        personagem
+        Personagem
         <input name="characterName" type="text" v-model="characterName" />
       </label>
 

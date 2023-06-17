@@ -4,12 +4,13 @@ import { useVoteStore } from '@/stores/vote';
 import { computed, ref } from 'vue';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 
-const { setVotes } = useVoteStore()
 const { cosplayers } = useCosplayerStore()
+const { setVotes } = useVoteStore()
 
+const data = computed(() => cosplayers.get(idFormat.value))
 const id = ref(useRoute().params.id)
 const idFormat = computed(() => parseInt(id.value as string))
-const data = computed(() => cosplayers.get(idFormat.value))
+
 const router = useRouter()
 
 const onSubmit = () => {
@@ -25,10 +26,7 @@ const onSubmit = () => {
   router.push({ path: `/vote/${idFormat.value + 1}` })
 }
 
-const onSkip = () => {
-  const number = Number.parseInt(id)
-  router.push({ path: `/vote/${number + 1}` })
-}
+const onSkip = () => router.push({ path: `/vote/${idFormat.value + 1}` })
 
 onBeforeRouteUpdate((to, from) => {
   if (to.params.id !== from.params.id) {
@@ -39,38 +37,37 @@ onBeforeRouteUpdate((to, from) => {
 
 <template>
   <main class="login">
-    <div v-if="data">
+    <section v-if="data">
       <div class="info">
         <h1>
           Cosplayer:
         </h1>
         <p id="cosplayerNumber">{{ data?.id }} - {{ data?.name }}</p>
-        <!-- <p>{{ data?.name }}</p> -->
         <h1>Cosplay:</h1>
         <p>{{ data?.characterName }}</p>
       </div>
+
       <div class="form">
         <h2>
-        Nota cosplayer:
-      </h2>
-      <input id="cosplayerVote" type="number" min="1" max="10" class="cosplayerVote" />
+          Nota cosplayer:
+        </h2>
+        <input id="cosplayerVote" type="number" min="1" max="10" class="cosplayerVote" />
 
-      <button type="submit" @click="onSubmit" class="submit">
-        Enviar
-      </button>
+        <button type="submit" @click="onSubmit" class="submit">
+          Enviar
+        </button>
 
-      <button type="submit" @click="onSkip" class="submit">
-        Pular
-      </button>
-    </div>
-    </div>
-    <img v-else src="../img/folks.jpg" alt="" class="end">
+        <button type="submit" @click="onSkip" class="submit">
+          Pular
+        </button>
+      </div>
+    </section>
+    <img v-else src="@/assets/folks.jpg" alt="" class="end">
   </main>
 </template>
 
 <style scoped>
 .login {
-  /* background-color: red; */
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -79,10 +76,9 @@ onBeforeRouteUpdate((to, from) => {
   align-items: center;
 }
 
-.info{
+.info {
   text-align: center;
 }
-
 
 .form {
   display: flex;
@@ -94,7 +90,7 @@ onBeforeRouteUpdate((to, from) => {
   align-items: center;
 }
 
-.form h2{
+.form h2 {
   margin: 5px;
 }
 
