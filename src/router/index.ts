@@ -12,7 +12,7 @@ const router = createRouter({
       component: () => import('../views/HomeView.vue')
     },
     {
-      path: '/vote',
+      path: '/vote/:id',
       name: 'vote',
       component: () => import('../views/VoteView.vue'),
       beforeEnter: (_to, _from, next) => {
