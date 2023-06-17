@@ -13,7 +13,7 @@ const onSubmit = () => {
         Coloque seu nome:
       </h2>
       <input id="username" type="text" class="username" />
-      <RouterLink to="/vote" class="submit">
+      <RouterLink to="/vote/1" class="submit">
         <button type="submit" @click="onSubmit">
           Enviar
         </button>
@@ -42,15 +42,13 @@ const onSubmit = () => {
 }
 
 .username {
-  width: 60%;
+  width: 65vw;
   margin: 10px;
 }
 
-.submit {
-  width: 10%;
-}
-
 .submit button {
-  width: 100%;
+  border: none;
+  height: 45px;
+  width: 45vw;
 }
 </style>

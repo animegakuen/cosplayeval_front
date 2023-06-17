@@ -20,10 +20,10 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <main>
-    <div>
+  <main  class="register">
+    <div class="form">
       <label>
-        Nome do personagem
+        personagem
         <input name="characterName" type="text" v-model="characterName" />
       </label>
 
@@ -42,15 +42,33 @@ const onSubmit = () => {
         <input name="phoneNumber" type="text" v-model="phoneNumber" />
       </label>
 
-      <button @click="onSubmit">Enviar</button>
+      <button @click="onSubmit" class="submit">Enviar</button>
     </div>
   </main>
 </template>
 
 <style scoped>
-main {
+.register {
   display: flex;
   height: 100vh;
   width: 100vw;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  flex-direction: column;
+  display: flex;
+}
+
+.form input {
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.submit {
+  border: none;
+  height: 45px;
 }
 </style>
