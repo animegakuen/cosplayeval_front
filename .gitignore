@@ -27,9 +27,6 @@ coverage
 *.sln
 *.sw?
 
-# Ignore data used by back-end
-public/data/
-
 # Ignore back-end binary and configuration
 cosplayeval_back
 api.cfg

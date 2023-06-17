@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useCosplayerStore } from '@/stores/cosplayer';
-import { useVoteStore } from '@/stores/vote';
 import { computed, ref } from 'vue';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 
+import { VoteAPI } from '@/structures/api';
+import { useCosplayerStore } from '@/stores/cosplayer';
+
 const { cosplayers } = useCosplayerStore()
-const { setVotes } = useVoteStore()
 
 const data = computed(() => cosplayers.get(idFormat.value))
 const id = ref(useRoute().params.id)
@@ -22,8 +22,8 @@ const onSubmit = () => {
 
   (document.getElementById('cosplayerVote') as HTMLInputElement).value = '';
 
-  setVotes({ cosplayerId: idFormat.value, score: vote, juryName: name! })
   router.push({ path: `/vote/${idFormat.value + 1}` })
+  VoteAPI.send({ cosplayerId: idFormat.value, score: vote, juryName: name! })
 }
 
 const onSkip = () => router.push({ path: `/vote/${idFormat.value + 1}` })

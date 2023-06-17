@@ -6,9 +6,15 @@ const { cosplayers } = useCosplayerStore()
 </script>
 
 <template>
-  <div v-for="{ id } in cosplayers" :key="id">
-    <CosplayerInfo :cosplayer-id="id" />
-  </div>
+  <section>
+    <div v-for="cosplayer in cosplayers" :key="cosplayer.id">
+      <CosplayerInfo :cosplayer="cosplayer" />
+    </div>
+  </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+section {
+  display: grid;
+}
+</style>
