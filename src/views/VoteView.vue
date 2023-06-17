@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { useCosplayerStore } from '@/stores/cosplayer';
 import { useVoteStore } from '@/stores/vote';
-import { useRoute, useRouter } from 'vue-router';
+import { computed, ref } from 'vue';
+import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 
 const { setVotes } = useVoteStore()
 const { cosplayers } = useCosplayerStore()
 
-const id = useRoute().params.id
-const idFormat = parseInt(id)
-const data = cosplayers.get(idFormat)
+const id = ref(useRoute().params.id)
+const idFormat = computed(() => parseInt(id.value as string))
+const data = computed(() => cosplayers.get(idFormat.value))
 const router = useRouter()
 
 const onSubmit = () => {
-  const number = Number.parseInt(id)
   const vote = Number.parseFloat((document.getElementById('cosplayerVote') as HTMLInputElement).value)
   const name = document.cookie
     .split("; ")
@@ -21,8 +21,8 @@ const onSubmit = () => {
 
   (document.getElementById('cosplayerVote') as HTMLInputElement).value = '';
 
-  setVotes({ cosplayerId: number, score: vote, juryName: name! })
-  router.push({ path: `/vote/${number + 1}` })
+  setVotes({ cosplayerId: idFormat.value, score: vote, juryName: name! })
+  router.push({ path: `/vote/${idFormat.value + 1}` })
 }
 
 const onSkip = () => {
@@ -30,6 +30,11 @@ const onSkip = () => {
   router.push({ path: `/vote/${number + 1}` })
 }
 
+onBeforeRouteUpdate((to, from) => {
+  if (to.params.id !== from.params.id) {
+    id.value = to.params.id
+  }
+})
 </script>
 
 <template>
