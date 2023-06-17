@@ -34,17 +34,18 @@ const onSkip = () => {
 
 <template>
   <main class="login">
-    <div class="info">
-      <h1>
-        Cosplayer:
-      </h1>
-      <p id="cosplayerNumber">{{ data?.id }} - {{ data?.name }}</p>
-      <!-- <p>{{ data?.name }}</p> -->
-      <h1>Cosplay:</h1>
-      <p>{{ data?.characterName }}</p>
-    </div>
-    <div v-if="data" class="form">
-      <h2>
+    <div v-if="data">
+      <div class="info">
+        <h1>
+          Cosplayer:
+        </h1>
+        <p id="cosplayerNumber">{{ data?.id }} - {{ data?.name }}</p>
+        <!-- <p>{{ data?.name }}</p> -->
+        <h1>Cosplay:</h1>
+        <p>{{ data?.characterName }}</p>
+      </div>
+      <div class="form">
+        <h2>
         Nota cosplayer:
       </h2>
       <input id="cosplayerVote" type="number" min="1" max="10" class="cosplayerVote" />
@@ -56,6 +57,7 @@ const onSkip = () => {
       <button type="submit" @click="onSkip" class="submit">
         Pular
       </button>
+    </div>
     </div>
     <img v-else src="../img/folks.jpg" alt="" class="end">
   </main>
